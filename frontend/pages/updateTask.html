@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Task</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/form.css">
+</head>
+
+<body class="form-container">
+    <form id="update-task">
+        <h2>Update Task</h2>
+        <div>
+            <label for="name">Task Name</label>
+            <input id="name" type="text" placeholder="Task name must not exceed 30 characters" maxlength="30">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <input id="description" type="text" placeholder="Description must not exceed 100 characters"
+                maxlength="100">
+        </div>
+        <div>
+            <label for="due-date">Due Date</label>
+            <input id="due-date" type="date">
+        </div>
+        <div>
+            <label for="due-time">Time</label>
+            <input type="time" id="due-time">
+        </div>
+
+        <a href="../index.html">Return to homepage</a>
+
+        <strong class="feedback"></strong>
+
+        <button type="submit">Update Task</button>
+    </form>
+    <script src="../utils/updateTask.js"></script>
+</body>
+
+</html>

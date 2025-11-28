@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --font-heading: "Merriweather", serif;
+    --font-body: "Work Sans", sans-serif;
+    --border-radius-large: 15px;
+    --border-radius-small: 5px;
+    --brown-50: #d4a37323;
+    --brown-100: #fefae0;
+    --brown-300: #faedcd;
+    --brown-500: #d4a373;
+    --brown-700: #5e3023;
+    --border-color: var(--brown-500);
+    --white: white;
+    --red: red;
+    --green: green;
+    --orange: orange;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100vh;
+    width: auto;
+    margin: 0;
+    padding: 3rem 7rem;
+    overflow-x: hidden;
+    color: var(--brown-700);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    background-color: var(--brown-500);
+}
+
+input, input::placeholder, select, button, a {
+    font: inherit;
+    color: inherit;
+}
+input, button, select {
+    background-color: transparent;
+}
+input:focus, select:focus {
+    outline: none;
+}
+button {
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--border-radius-small);
+    border: none;
+    background-color: var(--brown-700);
+    color: var(--brown-100);
+}
+button:hover {
+    cursor: pointer;
+}
+strong, h1 {
+    font-family: var(--font-heading);
+}
+a {
+    text-decoration: none;
+}
+
+/* ------------------------------------------------------------ */
+nav,
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+nav h1 {
+    color: var(--white);
+}
+
+main {
+    width: auto;
+    margin-top: 1.5rem;
+    padding: 2rem;
+    border-radius: var(--border-radius-large);
+    box-shadow:-10px 10px 0 #5e302331; 
+    background-color: var(--brown-300);
+}
+.main-header__sort {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.main-header__sort select {
+    border: 1px solid var(--border-color);
+    padding: 0.2rem;
+    border-radius: var(--border-radius-small);
+    background-color: transparent;
+}
+main hr {
+    border: 1px dashed var(--border-color);
+    margin: 2rem 0;
+}
+
+.main-body .action__btns button {
+   background-color: transparent;
+   color: inherit;
+   border: 1px solid var(--border-color);
+   margin-right: 0.5rem;
+}
+.main-body .action__btns button i {
+    color: inherit;
+}
+.main-body .action__btns button:hover {
+    color: var(--white);
+    border: none;
+}
+.main-body .action__btns .completed:hover {
+    background-color: var(--green);
+}
+.main-body .action__btns .pending:hover {
+    background-color: var(--orange);
+}
+.main-body .action__btns .delete:hover {
+    background-color: var(--red);
+}
+
+.main-body .todos {
+    margin-top: 2.5rem; 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 1.5rem;
+}
+.main-body .todo {
+    display: flex;
+    align-items: start;
+    gap: 0.8rem;
+}
+.main-body .todo input[type=checkbox] {
+    accent-color: var(--brown-700);
+    margin-top: 1.3rem;
+    
+}
+.main-body .todo__todo-items {
+    height: fit-content;
+    border-radius: var(--border-radius-small);
+    background-color: #fff6ee;
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    line-height: 2;
+    box-shadow:0 0 7px rgba(250, 119, 32, 0.185);
+    width: 330px;
+}
+
+.todo__todo-items .heading, 
+.todo__todo-items .heading > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6em;  
+}
+
+
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+}
+
+.completed i {
+    color: var(--green);
+}
+.pending i {
+    color: var(--orange);
+}
+.overdue i {
+    color: var(--red);
+}
+
+
+

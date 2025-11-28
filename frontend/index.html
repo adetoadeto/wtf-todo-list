@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/form.css">
+
+</head>
+
+<body>
+    <nav>
+        <h1>Todo List</h1>
+        <button><a href="./pages/login.html">Login</a></button>
+    </nav>
+
+    <main>
+        <header class="main-header">
+            <div class="main-header__sort">
+                <p>Sort By:</p>
+                <select name="sort">
+                    <option value="">All</option>
+                    <option value="">Completed</option>
+                    <option value="">Overdue</option>                   
+                    <option value="">Pending</option>
+                </select>
+            </div>
+
+            <button class="main-header__addTask"><a href="./pages/addTask.html">+ Add New Task</a></button>
+        
+        </header>
+        <hr>
+
+        <section class="main-body">
+            <div class="action__btns">
+                    <button class="completed">Mark as completed <i class="fa-solid fa-circle-check"></i></button>
+                    <button class="pending">Mark as pending <i class="fa-solid fa-clock-rotate-left"></i></button>
+                    <button class="delete">Delete Todo(s) <i class="fa-solid fa-trash"></i></button>
+            </div>
+
+            <div class="todos">
+        
+            </div>
+        </section>
+    </main>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+.form-container {
+    background-color: var(--brown-500);
+    position: relative;
+}
+.form-container form {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -20%);
+    background-color: var(--white);
+    width: 30%;
+    padding: 2rem 1.5rem;
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 0 15px #5e302354;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.form-container form h2 {
+    text-align: center;
+}
+.form-container form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.form-container form > div input {
+    padding: 10px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-small);
+    color: rgba(0, 0, 0, 0.479);
+}
+.form-container form input::placeholder {
+   color: rgba(0, 0, 0, 0.479);
+   font-size: 0.9rem;
+}
+
+.form-container form button {
+    padding: 0.7rem 0;
+}
+.form-container form button:hover {
+    font-size: 0.9rem;
+}
+.form-container form > p {
+    text-align: center;
+}
+.form-container form a {
+    text-decoration: underline;
+    font-weight: bold;
+    color: var(--brown-700);
+}
+
+.error {
+    color: var(--red);
+}
+.valid {
+    color: var(--green);
+}
