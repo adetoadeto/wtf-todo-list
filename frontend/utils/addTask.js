@@ -1,6 +1,6 @@
 const taskForm = document.querySelector("#add-task");
 const feedback = document.querySelector("#add-task .feedback")
-
+const BASE_URL = "https://todoapp-bydf.onrender.com"
 taskForm.addEventListener("submit", async (e) => {
     e.preventDefault()
 
@@ -10,7 +10,7 @@ taskForm.addEventListener("submit", async (e) => {
     const dueTime = document.querySelector("#add-task #due-time").value;
   
     try {
-        const data = await fetch("http://localhost:3000/api/task/create", {
+        const data = await fetch(`${BASE_URL}/api/task/create`, {
             method: "POST",
             credentials: "include",
             headers: {

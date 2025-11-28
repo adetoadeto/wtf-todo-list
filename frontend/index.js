@@ -1,3 +1,5 @@
+const BASE_URL = "https://todoapp-bydf.onrender.com"
+
 const navBtn = document.querySelector("nav button")
 const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
 
@@ -16,7 +18,7 @@ navBtn.addEventListener("click", () => {
 //display all task
 async function showAllTasks() {
     try {
-        const response = await fetch("http://localhost:3000/api/task/all-tasks")
+        const response = await fetch(`${BASE_URL}/api/task/all-tasks`)
 
         const data = await response.json();
 
@@ -87,7 +89,7 @@ deleteBtn.addEventListener("click", ()=> {
 })
 
 async function handleActionBtns (method, endpoint) {
-    console.log("clicked")
+ 
     const todoIds = []
     const allTodos = document.querySelectorAll(".checked")
 
@@ -101,7 +103,7 @@ async function handleActionBtns (method, endpoint) {
     }
 
     try { 
-        const response = await fetch(`http://localhost:3000/api/task/${endpoint}`, {
+        const response = await fetch(`${BASE_URL}/api/task/${endpoint}`, {
             method,
             headers: {
                 "Content-Type": "application/json"

@@ -14,7 +14,7 @@ loginForm.addEventListener("submit", (e) => {
         password
     }
 
-    handleAuthentication("http://localhost:3000/api/auth/login", userData, feedback)
+    handleAuthentication(`login`, userData, feedback)
 })
 
 

@@ -17,7 +17,7 @@ signUpForm.addEventListener("submit", (e) => {
     }
 
     let modalType = "sign-up"
-    handleAuthentication("http://localhost:3000/api/auth/signup", userData, feedback, modalType )
+    handleAuthentication(`signup`, userData, feedback, modalType )
 })
 
 

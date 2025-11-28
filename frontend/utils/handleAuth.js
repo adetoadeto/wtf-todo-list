@@ -1,6 +1,8 @@
-export default async function handleAuthentication (apiRoute, userData, feedback, modalType="") {
+const BASE_URL = "https://todoapp-bydf.onrender.com/api/auth";
+
+export default async function handleAuthentication (endpoint, userData, feedback, modalType="") {
     try {
-        const response = await fetch(apiRoute, {
+        const response = await fetch(`${BASE_URL}/${endpoint}`, {
             method: "POST",
             credentials: "include",
             headers: {
