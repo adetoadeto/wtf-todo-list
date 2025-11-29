@@ -11,7 +11,7 @@ export default async function handleAuthentication (endpoint, userData, feedback
             },
             body: JSON.stringify(userData)
         })
-        feedback.textContent = "Please wait"
+        
         const data = await response.json()
 
         if (!response.ok) {

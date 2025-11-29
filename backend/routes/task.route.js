@@ -1,8 +1,6 @@
 import express from "express";
 import {createTask, getTaskById, updateTaskById, getTaskByStatus, updateTasks, deleteTask, getAllTasks} from "../controllers/task.controller.js";
 
-import verifyUser from "../middlewares/verifyUser.js";
-
 const router = express.Router();
 
 // get all tasks (use user Id to get all his tasks)
