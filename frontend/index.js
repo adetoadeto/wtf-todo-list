@@ -74,12 +74,12 @@ select.addEventListener("change", async (e) => {
 //mark task(s) as completed 
 completedBtn.addEventListener("click", () => {
     console.log("clicked")
-    handleActionBtns("completed")
+    handleActionBtns("PATCH", "status-update/completed")
 })
 
 //mark task(s) as pending 
 pendingBtn.addEventListener("click", () => {
-    handleActionBtns("pending")
+    handleActionBtns("PATCH", "status-update/pending")
 })
 
 //deleteTask(s)
@@ -179,7 +179,7 @@ function renderTodos(data, sortBy) {
     })
 }
 
-async function handleActionBtns(endpoint) {
+async function handleActionBtns(method, endpoint) {
 
     const todoIds = []
     const allTodos = document.querySelectorAll(".checked")
@@ -192,8 +192,8 @@ async function handleActionBtns(endpoint) {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/task/status-update/${endpoint}`, {
-            method: "PATCH",
+        const response = await fetch(`${BASE_URL}/api/task/${endpoint}`, {
+            method,
             headers: {
                 "Content-Type": "application/json"
             },
