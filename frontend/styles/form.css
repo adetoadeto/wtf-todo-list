@@ -50,6 +50,7 @@
     text-decoration: underline;
     font-weight: bold;
     color: var(--brown-700);
+    width: fit-content;
 }
 
 .error {
