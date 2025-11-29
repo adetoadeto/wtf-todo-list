@@ -2,12 +2,10 @@ const taskForm = document.querySelector("#add-task");
 const feedback = document.querySelector("#add-task .feedback")
 const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
 const BASE_URL = "https://todoapp-bydf.onrender.com"
-console.log(userSignedIn)
 
 taskForm.addEventListener("submit", async (e) => {
     e.preventDefault()
-    if (!userSignedIn.userSignedIn) {
-        console.log(userSignedIn.userSignedIn)
+    if (!userSignedIn.signedIn) {
         window.location.href = "../pages/login.html";
         return;
     }
