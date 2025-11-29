@@ -1,5 +1,6 @@
+const updateForm = document.querySelector("#update-task");
+const feedback = document.querySelector("#update-task .feedback")
 const taskId = window.location.search.split("=")[1];
-
 const BASE_URL = "https://todoapp-bydf.onrender.com"
 
 //fetch task by Id
@@ -27,9 +28,6 @@ function populateForm (data) {
 }
 
 //update task by id
-const updateForm = document.querySelector("#update-task");
-const feedback = document.querySelector("#update-task .feedback")
-
 updateForm.addEventListener("submit", async (e)=> {
     e.preventDefault()
 

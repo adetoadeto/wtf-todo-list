@@ -1,7 +1,6 @@
 const taskForm = document.querySelector("#add-task");
 const feedback = document.querySelector("#add-task .feedback")
 const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
-
 const BASE_URL = "https://todoapp-bydf.onrender.com"
 
 taskForm.addEventListener("submit", async (e) => {
@@ -16,7 +15,7 @@ taskForm.addEventListener("submit", async (e) => {
     const dueTime = document.querySelector("#add-task #due-time").value;
   
     try {
-        const data = await fetch(`${BASE_URL}/api/task/create`, {
+        const response = await fetch(`${BASE_URL}/api/task/create`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -25,15 +24,15 @@ taskForm.addEventListener("submit", async (e) => {
             body: JSON.stringify({ title: taskName, description: taskDescription, dueDate, dueTime })
         })
 
-        const response = await data.json();
+        const data = await response.json();
 
-        if (!data.ok) {
+        if (!response.ok) {
             feedback.classList.add("error")
-            feedback.textContent = response.message
+            feedback.textContent = data.message
 
         } else {
             feedback.classList.add("valid")
-            feedback.textContent = `${response.message} Redirecting...`
+            feedback.textContent = `${data.message} Redirecting...`
             
             setTimeout(() => {
                 window.location.href = "../index.html"
@@ -46,11 +45,3 @@ taskForm.addEventListener("submit", async (e) => {
     }
 
 })
-
-// if (dueDate >= currentDate) {
-//     if (dueTime < currentTime) {
-//         console.log("time don pass")
-//     }
-// } else {
-//     console.log("day don pass")
-// }

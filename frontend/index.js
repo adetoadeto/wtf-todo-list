@@ -31,24 +31,6 @@ function loggedInStatus() {
 }
 loggedInStatus()
 
-//sort by selection
-select.addEventListener("change", async (e) => {
-    const sortBy = e.target.value
-
-    try {
-        const response = await fetch(`${BASE_URL}/api/task/all-tasks`)
-
-        const data = await response.json();
-
-        if (response.ok) {
-            parentElement.innerHTML = ""
-            renderTodos(data, sortBy)
-        }
-    } catch (err) {
-        console.log(err.message)
-    }
-})
-
 //display all todos
 async function fetchTodos() {
     if (!userSignedIn.signedIn) {
@@ -71,15 +53,33 @@ async function fetchTodos() {
 }
 fetchTodos()
 
+//sort by selection
+select.addEventListener("change", async (e) => {
+    const sortBy = e.target.value
+
+    try {
+        const response = await fetch(`${BASE_URL}/api/task/all-tasks`)
+
+        const data = await response.json();
+
+        if (response.ok) {
+            parentElement.innerHTML = ""
+            renderTodos(data, sortBy)
+        }
+    } catch (err) {
+        console.log(err.message)
+    }
+})
+
 //mark task(s) as completed 
 completedBtn.addEventListener("click", () => {
     console.log("clicked")
-    handleActionBtns("PATCH", "status-update/completed")
+    handleActionBtns("completed")
 })
 
 //mark task(s) as pending 
 pendingBtn.addEventListener("click", () => {
-    handleActionBtns("PATCH", "status-update/pending")
+    handleActionBtns("pending")
 })
 
 //deleteTask(s)
@@ -179,7 +179,7 @@ function renderTodos(data, sortBy) {
     })
 }
 
-async function handleActionBtns(method, endpoint) {
+async function handleActionBtns(endpoint) {
 
     const todoIds = []
     const allTodos = document.querySelectorAll(".checked")
@@ -192,8 +192,8 @@ async function handleActionBtns(method, endpoint) {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/task/${endpoint}`, {
-            method,
+        const response = await fetch(`${BASE_URL}/api/task/status-update/${endpoint}`, {
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -205,7 +205,6 @@ async function handleActionBtns(method, endpoint) {
             alert(data.message)
             window.location.href = "./index.html"
         }
-        console.log(data)
     } catch (err) {
         console.log(err.message)
     }
