@@ -7,6 +7,7 @@ console.log(userSignedIn)
 taskForm.addEventListener("submit", async (e) => {
     e.preventDefault()
     if (!userSignedIn.userSignedIn) {
+        console.log(userSignedIn.userSignedIn)
         window.location.href = "../pages/login.html";
         return;
     }
