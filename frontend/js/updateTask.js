@@ -6,7 +6,9 @@ const BASE_URL = "https://todoapp-bydf.onrender.com"
 //fetch task by Id
 async function fetchTaskById (taskId) {
      try {
-        const response = await fetch(`${BASE_URL}/api/task/${taskId}`)
+        const response = await fetch(`${BASE_URL}/api/task/${taskId}`, {
+            credentials: "include"
+        })
         const data = await response.json()
       
         populateForm(data)

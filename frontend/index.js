@@ -58,7 +58,9 @@ select.addEventListener("change", async (e) => {
     const sortBy = e.target.value
 
     try {
-        const response = await fetch(`${BASE_URL}/api/task/all-tasks`)
+        const response = await fetch(`${BASE_URL}/api/task/all-tasks`, {
+            credentials: "include"
+        })
 
         const data = await response.json();
 
