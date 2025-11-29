@@ -3,7 +3,6 @@ const feedback = document.querySelector("#add-task .feedback")
 const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
 
 const BASE_URL = "https://todoapp-bydf.onrender.com"
-//const BASE_URL = "http://localhost:3000";
 
 taskForm.addEventListener("submit", async (e) => {
     e.preventDefault()

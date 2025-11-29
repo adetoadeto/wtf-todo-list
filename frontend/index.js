@@ -14,7 +14,6 @@ const icons = {
 }
 const dateToday = new Date().toISOString().split("T")[0]
 
-// const BASE_URL = "http://localhost:3000"
 const BASE_URL = "https://todoapp-bydf.onrender.com"
 
 //handle login status
@@ -129,6 +128,9 @@ function renderTodos(data, sortBy) {
     }
 
     data.map((item) => {
+        if (item.dueDate === dateToday) {
+            alert("Todo List")
+        }
         if (item.status === "pending" && item.dueDate < dateToday) {
             item.status = "overdue"
         }

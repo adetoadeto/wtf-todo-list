@@ -1,5 +1,4 @@
 const BASE_URL = "https://todoapp-bydf.onrender.com/api/auth";
-//const BASE_URL = "http://localhost:3000/api/auth";
 
 export default async function handleAuthentication (endpoint, userData, feedback, action="") {
     try {

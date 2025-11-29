@@ -1,7 +1,6 @@
 const taskId = window.location.search.split("=")[1];
 
 const BASE_URL = "https://todoapp-bydf.onrender.com"
-//const BASE_URL = "http://localhost:3000";
 
 //fetch task by Id
 async function fetchTaskById (taskId) {
