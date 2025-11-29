@@ -1,5 +1,5 @@
 import express from "express";
-import {createTask, getTaskById, updateTaskById, updateTasksByStatus, deleteTask, getAllTasks, updateTasksByStatus} from "../controllers/task.controller.js";
+import {createTask, getTaskById, updateTaskById, updateTasksByStatus, deleteTask, getAllTasks} from "../controllers/task.controller.js";
 
 import verifyUser from "../middlewares/verifyUser.js";
 
