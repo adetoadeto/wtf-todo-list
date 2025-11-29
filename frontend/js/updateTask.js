@@ -1,4 +1,4 @@
-const taskId = new URLSearchParams(window.location.search).get("id")
+const taskId = window.location.search;
 console.log(taskId)
 
 const BASE_URL = "https://todoapp-bydf.onrender.com"
