@@ -16,8 +16,8 @@ signUpForm.addEventListener("submit", (e) => {
         password
     }
 
-    let modalType = "sign-up"
-    handleAuthentication(`signup`, userData, feedback, modalType )
+    let action = "sign-up"
+    handleAuthentication(`signup`, userData, feedback, action )
 })
 
 

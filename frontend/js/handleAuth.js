@@ -1,7 +1,7 @@
 const BASE_URL = "https://todoapp-bydf.onrender.com/api/auth";
 //const BASE_URL = "http://localhost:3000/api/auth";
 
-export default async function handleAuthentication (endpoint, userData, feedback, modalType="") {
+export default async function handleAuthentication (endpoint, userData, feedback, action="") {
     try {
         const response = await fetch(`${BASE_URL}/${endpoint}`, {
             method: "POST",
@@ -15,16 +15,16 @@ export default async function handleAuthentication (endpoint, userData, feedback
 
         if (!response.ok) {
             feedback.classList.add("error")
-            feedback.textContent = data.message
+            feedback.textContent = action ? `${data.message}. Login to proceed` : `${data.message} Redirecting...`
         } else {
             feedback.classList.add("valid")
             feedback.textContent = data.message
 
             localStorage.setItem("user", JSON.stringify({signedIn: true}))
             
-            {modalType && setTimeout(() => {
-                window.location.href = "../pages/login.html"
-            }, 1000)};
+            setTimeout(() => {
+                window.location.href = action ? "../pages/login.html" : "../index.html"
+            }, 1000);
             clearTimeout();
             
         }

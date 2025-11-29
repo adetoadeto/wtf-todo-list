@@ -67,6 +67,7 @@ fetchTodos()
 
 //mark task(s) as completed 
 completedBtn.addEventListener("click", () => {
+    console.log("clicked")
     handleActionBtns("PATCH", "status-update/completed")
 })
 
@@ -100,7 +101,8 @@ function sorting(data, sortBy) {
         })
         return overdueTasks;
     } else if (sortBy === "date"){
-        const sortedTask = data.sort((a, b)=> console.log(new Date(a.dueDate) (new Date(b.dueDate))))
+        const sortedTask = data.sort((a, b)=> new Date(a.dueDate) - (new Date(b.dueDate)))
+        return sortedTask
     
     } else {
         const sortedTask = data.filter((item) => item.status === sortBy);
@@ -157,9 +159,7 @@ async function handleActionBtns(method, endpoint) {
         if (todo.checked) {
             const todoId = todo.nextElementSibling.querySelector(".heading a").href.split("=")[1]
             todoIds.push(todoId)
-        } else {
-            return;
-        }
+        } 
     }
 
     try {
@@ -173,8 +173,8 @@ async function handleActionBtns(method, endpoint) {
         })
         const data = await response.json()
         if (response.ok) {
-            window.location.href = "./index.html"
             alert(data.message)
+            window.location.href = "./index.html"
         }
         console.log(data)
     } catch (err) {
