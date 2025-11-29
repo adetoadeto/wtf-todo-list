@@ -154,6 +154,8 @@ async function handleActionBtns(method, endpoint) {
         if (todo.checked) {
             const todoId = todo.nextElementSibling.querySelector(".heading a").href.split("=")[1]
             todoIds.push(todoId)
+        } else {
+            return;
         }
     }
 

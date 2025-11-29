@@ -28,7 +28,7 @@ export const createTask = async (req, res) => {
 export const getAllTasks = async (req, res) => {
 
     try {
-        const allTasks = await Task.find({ userId: "692352c8877088d9e146274a" }).select("-__v -userId -createdAt -updatedAt")
+        const allTasks = await Task.find({ userId: "692352c8877088d9e146274a" }).select("-__v -userId -createdAt").sort({updatedAt: -1})
         res.status(200).json(allTasks)
 
     } catch (err) {
@@ -45,7 +45,7 @@ export const getTaskByStatus = async (req, res) => {
     const dateToday = new Date().toISOString().split("T")[0];
 
     try {
-        const task = await Task.find({ status }).select("-__v -userId -createdAt -updatedAt");
+        const task = await Task.find({ status }).select("-__v -userId -createdAt").sort({updatedAt: -1});
 
         // if (status === "overdue" || status === "pending") {
         //     const overdueTasks = [];
