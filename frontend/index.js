@@ -100,8 +100,8 @@ function sorting(data, sortBy) {
         })
         return overdueTasks;
     } else if (sortBy === "date"){
-        const sortedTask = data.sort((a, b)=> a.dueDate - b.dueDate)
-        console.log(sortedTask)
+        const sortedTask = data.sort((a, b)=> console.log(new Date(a.dueDate) (new Date(b.dueDate))))
+    
     } else {
         const sortedTask = data.filter((item) => item.status === sortBy);
         return sortedTask;
