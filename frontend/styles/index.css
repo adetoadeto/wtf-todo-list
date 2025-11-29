@@ -25,7 +25,7 @@ body {
     height: 100vh;
     width: auto;
     margin: 0;
-    padding: 3rem 7rem;
+    padding: 2rem;
     overflow-x: hidden;
     color: var(--brown-700);
     font-size: 1rem;
@@ -66,6 +66,7 @@ nav,
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 nav h1 {
@@ -74,7 +75,7 @@ nav h1 {
 
 main {
     width: auto;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     padding: 2rem;
     border-radius: var(--border-radius-large);
     box-shadow:-10px 10px 0 #5e302331; 
@@ -93,14 +94,14 @@ main {
 }
 main hr {
     border: 1px dashed var(--border-color);
-    margin: 2rem 0;
+    margin: 2rem 0 1rem;
 }
 
 .main-body .action__btns button {
    background-color: transparent;
    color: inherit;
    border: 1px solid var(--border-color);
-   margin-right: 0.5rem;
+   margin: 1rem 0.5rem 0 0;
 }
 .main-body .action__btns button i {
     color: inherit;
@@ -156,23 +157,45 @@ main hr {
     gap: 0.6em;  
 }
 
-
-.hide {
-    display: none;
-}
-.show {
-    display: block;
-}
-
-.completed i {
+.todo .completed {
     color: var(--green);
+    opacity: 60%;
 }
-.pending i {
-    color: var(--orange);
+.todo .completed p, 
+.todo .completed strong {
+    text-decoration: line-through; 
 }
-.overdue i {
+
+.todo .overdue i {
     color: var(--red);
 }
 
+@media (max-width: 600px) {
+   .main-body .action__btns button {
+        margin-right: 0;
+   }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
+    main {
+        padding: 2rem 1.5rem;
+    }
+    .main-header__addTask {
+        width: 100%;
+        margin-top: 1rem;
+    }
+    .main-body .action__btns button {
+        width: 100%;
+    }
+    .main-body .todos {
+        display: block;
+    }
+    .main-body .todo {
+        margin-top: 1.5rem;
+    }
+}
 
 

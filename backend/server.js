@@ -16,11 +16,11 @@ const app = express();
 
 const allowedOrigins = [
     "http://127.0.0.1:5500",
-    "https://your-frontend-domain.com" //link after deployment
+    "https://todo-app-pgyr.onrender.com"
 ]
 
 app.use(cors({
-    origin: true,
+    origin: allowedOrigins,
     credentials: true,
 }));
 

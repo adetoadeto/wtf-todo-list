@@ -1,54 +1,129 @@
+const navBtn = document.querySelector("nav button")
+const select = document.querySelector(".main-header__sort select")
+const completedBtn = document.querySelector(".action__btns .completed");
+const pendingBtn = document.querySelector(".action__btns .pending");
+const deleteBtn = document.querySelector(".action__btns .delete");
+const parentElement = document.querySelector(".todos");
+const icons = {
+        pending: "fa-solid fa-clock-rotate-left",
+        completed: "fa-solid fa-circle-check",
+        overdue: "fa-solid fa-circle-exclamation"
+}
+const dateToday = new Date().toISOString().split("T")[0]
+
+// const BASE_URL = "http://localhost:3000"
 const BASE_URL = "https://todoapp-bydf.onrender.com"
 
-const navBtn = document.querySelector("nav button")
-const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
+//handle login status
+function loggedInStatus() {
+    const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
 
-//handle loggedIn
-if (userSignedIn.signedIn) {
-    navBtn.innerHTML = "Logout"
-}
-// handle loggedOut
-navBtn.addEventListener("click", () => {
     if (userSignedIn.signedIn) {
-        localStorage.clear()
-        navBtn.innerHTML = `<a href="./pages/login.html">Login</a>`
+        navBtn.innerHTML = "Logout"
     }
-})
 
-//display all task
-async function showAllTasks() {
+    navBtn.addEventListener("click", () => {
+        if (userSignedIn.signedIn) {
+            localStorage.clear()
+            navBtn.innerHTML = `<a href="./pages/login.html">Login</a>`
+        }
+    })
+}
+loggedInStatus()
+
+//sort by selection
+select.addEventListener("change", async (e) => {
+    const sortBy = e.target.value
+
     try {
         const response = await fetch(`${BASE_URL}/api/task/all-tasks`)
 
         const data = await response.json();
 
         if (response.ok) {
-            todoItem(data)
+            parentElement.innerHTML = ""
+            renderTodos(data, sortBy)
         }
+    } catch (err) {
+        console.log(err.message)
+    }
+})
 
+//display all todos
+async function fetchTodos() {
+    try {
+        const response = await fetch(`${BASE_URL}/api/task/all-tasks`)
+
+        const data = await response.json();
+
+        if (response.ok) {
+            renderTodos(data)
+        }
     } catch (err) {
         console.log(err.message)
     }
 }
-showAllTasks()
+fetchTodos()
 
-function todoItem(data) {
-    const parentElement = document.querySelector(".todos")
+//mark task(s) as completed 
+completedBtn.addEventListener("click", () => {
+    handleActionBtns("PATCH", "status-update/completed")
+})
 
-    //icons
-    const icons = {
-        pending: "fa-solid fa-clock-rotate-left",
-        completed: "fa-solid fa-circle-check",
-        overdue: "fa-solid fa-circle-exclamation"
+//mark task(s) as pending 
+pendingBtn.addEventListener("click", () => {
+    handleActionBtns("PATCH", "status-update/pending")
+})
+
+//deleteTask(s)
+deleteBtn.addEventListener("click", () => {
+    let confirm = window.confirm("Proceed to delete? ")
+    if (confirm) {
+        handleActionBtns("DELETE", "delete")
+    }
+})
+
+
+
+//Reusable functions
+function sorting(data, sortBy) {
+   
+    if (sortBy === "overdue") {
+        overdueTasks = []
+        
+        const sortedTask = data.filter((item) => item.status === "pending")
+
+        sortedTask.map((item) => {
+            if (item.dueDate < dateToday) {
+                overdueTasks.push(item)
+            }
+        })
+        return overdueTasks;
+    } else {
+        const sortedTask = data.filter((item) => item.status === sortBy);
+        return sortedTask;
+    }
+}
+
+function renderTodos(data, sortBy) {
+    if (sortBy === "all") {
+        sortBy = ""
+    }
+
+    if (sortBy) {
+        data = sorting(data, sortBy) 
     }
 
     data.map((item) => {
+        if (item.status === "pending" && item.dueDate < dateToday) {
+            item.status = "overdue"
+        }
 
         const todoItem = document.createElement("div")
         todoItem.className = "todo"
 
         todoItem.innerHTML =
-          `
+            `
           <input type="checkbox" name="checkbox" class="checked" title="Select todo to mark as completed, pending or delete task"> 
           <div class="todo__todo-items ${item.status}"> 
               <div class="heading">
@@ -64,45 +139,25 @@ function todoItem(data) {
                 <i class="fa-regular fa-calendar-days"></i> ${item.dueDate}; ${item.dueTime}
             </p>
           </div>`
-           
+
 
         parentElement.appendChild(todoItem)
     })
 }
 
-//mark as completed 
-const completedBtn = document.querySelector(".action__btns .completed");
-completedBtn.addEventListener("click", ()=> {
-    handleActionBtns("PATCH", "status-update/completed")
-})
+async function handleActionBtns(method, endpoint) {
 
-//mark as pending 
-const pendingBtn = document.querySelector(".action__btns .pending");
-pendingBtn.addEventListener("click", ()=> {
-    handleActionBtns("PATCH", "status-update/pending")
-})
-
-//deleteTask
-const deleteBtn = document.querySelector(".action__btns .delete");
-deleteBtn.addEventListener("click", ()=> {
-    handleActionBtns("DELETE", "delete")
-})
-
-async function handleActionBtns (method, endpoint) {
- 
     const todoIds = []
     const allTodos = document.querySelectorAll(".checked")
 
     for (let todo of allTodos) {
         if (todo.checked) {
-
-            const todoId = todo.parentElement.parentElement.parentElement.querySelector("a").href.split("?")[1].split("=")[1]
-
+            const todoId = todo.nextElementSibling.querySelector(".heading a").href.split("=")[1]
             todoIds.push(todoId)
         }
     }
 
-    try { 
+    try {
         const response = await fetch(`${BASE_URL}/api/task/${endpoint}`, {
             method,
             headers: {
@@ -113,13 +168,18 @@ async function handleActionBtns (method, endpoint) {
         })
         const data = await response.json()
         if (response.ok) {
-           window.location.href = "./index.html" 
+            window.location.href = "./index.html"
+            alert(data.message)
         }
         console.log(data)
     } catch (err) {
         console.log(err.message)
     }
 }
+
+
+
+
 
 
 

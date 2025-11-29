@@ -1,4 +1,5 @@
 const BASE_URL = "https://todoapp-bydf.onrender.com/api/auth";
+//const BASE_URL = "http://localhost:3000/api/auth";
 
 export default async function handleAuthentication (endpoint, userData, feedback, modalType="") {
     try {
@@ -23,7 +24,7 @@ export default async function handleAuthentication (endpoint, userData, feedback
             
             {modalType && setTimeout(() => {
                 window.location.href = "../pages/login.html"
-            }, 1500)};
+            }, 1000)};
             clearTimeout();
             
         }

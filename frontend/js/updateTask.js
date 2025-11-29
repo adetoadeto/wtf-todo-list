@@ -1,9 +1,13 @@
 const taskId = new URLSearchParams(window.location.search).get("id")
+console.log(taskId)
+
 const BASE_URL = "https://todoapp-bydf.onrender.com"
+//const BASE_URL = "http://localhost:3000";
+
 //fetch task by Id
 async function fetchTaskById (taskId) {
      try {
-        const response = await fetch(`${BASE_URL}/api/task/${taskId}`)
+        const response = await fetch(`${js_URL}/api/task/${taskId}`)
         const data = await response.json()
       
         populateForm(data)

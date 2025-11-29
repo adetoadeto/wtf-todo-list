@@ -1,6 +1,7 @@
 .form-container {
     background-color: var(--brown-500);
     position: relative;
+    padding: 2rem;
 }
 .form-container form {
     position: absolute;
@@ -8,7 +9,7 @@
     top: 20%;
     transform: translate(-50%, -20%);
     background-color: var(--white);
-    width: 30%;
+    width: 40%;
     padding: 2rem 1.5rem;
     border-radius: var(--border-radius-large);
     box-shadow: 0 0 15px #5e302354;
@@ -56,4 +57,20 @@
 }
 .valid {
     color: var(--green);
+}
+
+@media (max-width: 1280px) {
+    .form-container form {
+        width: 60%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media (max-width: 1024px) {
+    .form-container form {
+        width: 80%;
+        top: 30%;
+        transform: translate(-50%, -30%);
+    }
 }
