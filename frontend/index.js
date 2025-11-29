@@ -6,14 +6,12 @@ const deleteBtn = document.querySelector(".action__btns .delete");
 const parentElement = document.querySelector(".todos");
 const feedback = document.querySelector(".main-body .feedback")
 const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
-
 const icons = {
         pending: "fa-solid fa-clock-rotate-left",
         completed: "fa-solid fa-circle-check",
         overdue: "fa-solid fa-circle-exclamation"
 }
 const dateToday = new Date().toISOString().split("T")[0]
-
 const BASE_URL = "https://todoapp-bydf.onrender.com"
 
 //handle login status
@@ -92,6 +90,29 @@ deleteBtn.addEventListener("click", () => {
     }
 })
 
+//handle notifications
+async function handleNotifications() {
+    if (!userSignedIn.signedIn) {
+       return;
+    }
+
+    try {
+        const response = await fetch(`${BASE_URL}/api/task/all-tasks`, {
+            credentials: "include"
+        })
+
+        const data = await response.json();
+
+        for (let item of data) {
+            if (item.dueDate === dateToday) {
+              
+            }
+        }
+    } catch (err) {
+        console.log(err.message)
+    }
+}
+
 
 
 //Reusable functions
@@ -128,9 +149,6 @@ function renderTodos(data, sortBy) {
     }
 
     data.map((item) => {
-        if (item.dueDate === dateToday) {
-            alert("Todo List")
-        }
         if (item.status === "pending" && item.dueDate < dateToday) {
             item.status = "overdue"
         }
