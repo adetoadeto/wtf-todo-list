@@ -1,5 +1,4 @@
 const taskId = window.location.search.split("=")[1];
-console.log(taskId)
 
 const BASE_URL = "https://todoapp-bydf.onrender.com"
 //const BASE_URL = "http://localhost:3000";
@@ -44,7 +43,7 @@ updateForm.addEventListener("submit", async (e)=> {
     const dueTime = document.querySelector("#update-task #due-time").value;
 
     try {
-        const response = await fetch(`http://localhost:3000/api/task/update/${taskId}`, {
+        const response = await fetch(`${BASE_URL}/api/task/update/${taskId}`, {
             method: "PATCH",
             credentials: "include",
             headers: {
