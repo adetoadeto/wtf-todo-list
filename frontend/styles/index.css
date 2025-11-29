@@ -119,6 +119,11 @@ main hr {
 .main-body .action__btns .delete:hover {
     background-color: var(--red);
 }
+.main-body .feedback {
+    display: block;
+    margin-top: 3rem;
+    font-style: italic;
+}
 
 .main-body .todos {
     margin-top: 2.5rem; 

@@ -4,6 +4,9 @@ const completedBtn = document.querySelector(".action__btns .completed");
 const pendingBtn = document.querySelector(".action__btns .pending");
 const deleteBtn = document.querySelector(".action__btns .delete");
 const parentElement = document.querySelector(".todos");
+const feedback = document.querySelector(".main-body .feedback")
+const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
+
 const icons = {
         pending: "fa-solid fa-clock-rotate-left",
         completed: "fa-solid fa-circle-check",
@@ -16,8 +19,6 @@ const BASE_URL = "https://todoapp-bydf.onrender.com"
 
 //handle login status
 function loggedInStatus() {
-    const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
-
     if (userSignedIn.signedIn) {
         navBtn.innerHTML = "Logout"
     }
@@ -26,6 +27,8 @@ function loggedInStatus() {
         if (userSignedIn.signedIn) {
             localStorage.clear()
             navBtn.innerHTML = `<a href="./pages/login.html">Login</a>`
+            parentElement.innerHTML = ""
+            feedback.textContent = "Login to view tasks. New User? Create an account to get started"
         }
     })
 }
@@ -51,14 +54,20 @@ select.addEventListener("change", async (e) => {
 
 //display all todos
 async function fetchTodos() {
+    if (!userSignedIn.signedIn) {
+       return;
+    }
     try {
-        const response = await fetch(`${BASE_URL}/api/task/all-tasks`)
+        const response = await fetch(`${BASE_URL}/api/task/all-tasks`, {
+            credentials: "include"
+        })
 
         const data = await response.json();
 
         if (response.ok) {
+            feedback.textContent = ""
             renderTodos(data)
-        }
+        } 
     } catch (err) {
         console.log(err.message)
     }

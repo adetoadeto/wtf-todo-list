@@ -1,12 +1,16 @@
 const taskForm = document.querySelector("#add-task");
 const feedback = document.querySelector("#add-task .feedback")
+const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
 
 const BASE_URL = "https://todoapp-bydf.onrender.com"
 //const BASE_URL = "http://localhost:3000";
 
 taskForm.addEventListener("submit", async (e) => {
     e.preventDefault()
-
+    if (!userSignedIn.userSignedIn) {
+        window.location.href = "../pages/login.html";
+        return;
+    }
     const taskName = document.querySelector("#add-task #name").value;
     const taskDescription = document.querySelector("#add-task #description").value;
     const dueDate = document.querySelector("#add-task #due-date").value;
