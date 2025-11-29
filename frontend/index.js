@@ -91,14 +91,17 @@ function sorting(data, sortBy) {
     if (sortBy === "overdue") {
         overdueTasks = []
         
-        const sortedTask = data.filter((item) => item.status === "pending")
+        const pendingTasks = data.filter((item) => item.status === "pending")
 
-        sortedTask.map((item) => {
+        pendingTasks.map((item) => {
             if (item.dueDate < dateToday) {
                 overdueTasks.push(item)
             }
         })
         return overdueTasks;
+    } else if (sortBy === "date"){
+        const sortedTask = data.sort((a, b)=> a.dueDate - b.dueDate )
+        console.log(sortedTask)
     } else {
         const sortedTask = data.filter((item) => item.status === sortBy);
         return sortedTask;
