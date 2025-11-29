@@ -11,20 +11,21 @@ export default async function handleAuthentication (endpoint, userData, feedback
             },
             body: JSON.stringify(userData)
         })
+        feedback.textContent = "Please wait"
         const data = await response.json()
 
         if (!response.ok) {
             feedback.classList.add("error")
-            feedback.textContent = action ? `${data.message}. Login to proceed` : `${data.message} Redirecting...`
+            feedback.textContent = data.message
         } else {
             feedback.classList.add("valid")
-            feedback.textContent = data.message
+            feedback.textContent = action ? `${data.message}. Login to proceed` : `${data.message} Redirecting...`
 
             localStorage.setItem("user", JSON.stringify({signedIn: true}))
             
             setTimeout(() => {
                 window.location.href = action ? "../pages/login.html" : "../index.html"
-            }, 1000);
+            }, 1500);
             clearTimeout();
             
         }
