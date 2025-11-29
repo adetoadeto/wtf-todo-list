@@ -2,8 +2,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import verifyUser from "../middlewares/verifyUser.js";
-
 import taskRoute from "./routes/task.route.js";
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
@@ -27,7 +25,7 @@ app.use(cors({
 }));
 
 app.use(express.json())
-app.use("/api/task", verifyUser, taskRoute)
+app.use("/api/task", taskRoute)
 app.use("/api/user", userRoute)
 app.use("/api/auth", authRoute)
 
