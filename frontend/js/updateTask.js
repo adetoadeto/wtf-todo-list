@@ -32,6 +32,8 @@ function populateForm (data) {
 //update task by id
 updateForm.addEventListener("submit", async (e)=> {
     e.preventDefault()
+    
+    feedback.textContent = "Processing...";
 
     const taskName = document.querySelector("#update-task #name").value;
 

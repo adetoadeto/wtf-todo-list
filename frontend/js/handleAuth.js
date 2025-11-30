@@ -1,6 +1,7 @@
 const BASE_URL = "https://todoapp-bydf.onrender.com/api/auth";
 
 export default async function handleAuthentication (endpoint, userData, feedback, action="") {
+    feedback.textContent = "Processing...";
     try {
         const response = await fetch(`${BASE_URL}/${endpoint}`, {
             method: "POST",
