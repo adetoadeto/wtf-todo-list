@@ -89,7 +89,6 @@ select.addEventListener("change", async (e) => {
 
 //mark task(s) as completed 
 completedBtn.addEventListener("click", () => {
-
     handleActionBtns("PATCH", "status-update/completed")
 })
 
@@ -100,6 +99,10 @@ pendingBtn.addEventListener("click", () => {
 
 //deleteTask(s)
 deleteBtn.addEventListener("click", () => {
+    if (!userSignedIn.signedIn) {
+        return;
+    }
+    
     let confirm = window.confirm("Proceed to delete? ")
     if (confirm) {
         handleActionBtns("DELETE", "delete")
