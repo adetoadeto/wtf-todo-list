@@ -25,7 +25,7 @@ function loggedInStatus() {
             localStorage.clear()
             navBtn.innerHTML = `<a href="./pages/login.html">Login</a>`
             parentElement.innerHTML = ""
-            feedback.textContent = "Login to view tasks. New User? Create an account to get started"
+            feedback.textContent = "Create an account to get started. Returning user? Login to view tasks."
         }
     })
 }
@@ -75,7 +75,7 @@ select.addEventListener("change", async (e) => {
 
 //mark task(s) as completed 
 completedBtn.addEventListener("click", () => {
-    console.log("clicked")
+  
     handleActionBtns("PATCH", "status-update/completed")
 })
 
