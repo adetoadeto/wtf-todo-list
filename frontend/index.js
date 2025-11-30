@@ -107,7 +107,7 @@ async function handleNotifications() {
 
         for (let item of data) {
             if (item.dueDate === dateToday) {
-              
+              alert(`Task due: ${item.title} ${item.dueTime}`)
             }
         }
     } catch (err) {
@@ -115,6 +115,7 @@ async function handleNotifications() {
     }
 }
 
+handleNotifications()
 
 
 //Reusable functions
