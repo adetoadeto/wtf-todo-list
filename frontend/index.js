@@ -7,9 +7,9 @@ const parentElement = document.querySelector(".todos");
 const feedback = document.querySelector(".main-body .feedback")
 const userSignedIn = JSON.parse(localStorage.getItem("user")) || []
 const icons = {
-        pending: "fa-solid fa-clock-rotate-left",
-        completed: "fa-solid fa-circle-check",
-        overdue: "fa-solid fa-circle-exclamation"
+    pending: "fa-solid fa-clock-rotate-left",
+    completed: "fa-solid fa-circle-check",
+    overdue: "fa-solid fa-circle-exclamation"
 }
 const dateToday = new Date().toISOString().split("T")[0]
 const BASE_URL = "https://todoapp-bydf.onrender.com"
@@ -18,14 +18,28 @@ const BASE_URL = "https://todoapp-bydf.onrender.com"
 function loggedInStatus() {
     if (userSignedIn.signedIn) {
         navBtn.innerHTML = "Logout"
+        feedback.innerHTML = ""
     }
 
-    navBtn.addEventListener("click", () => {
+    navBtn.addEventListener("click", async () => {
         if (userSignedIn.signedIn) {
-            localStorage.clear()
-            navBtn.innerHTML = `<a href="./pages/login.html">Login</a>`
-            parentElement.innerHTML = ""
-            feedback.innerHTML = '<a href="./pages/signUp.html">Create an account </a> to get started. Returning user? <a href="./pages/login.html">Login</a> to view tasks.'
+            try {
+                const response = await fetch(`${BASE_URL}/api/auth/logout`, {
+                    method: "POST",
+                    credentials: "include"
+                })
+                if (response.ok) {
+                    localStorage.clear()
+                    navBtn.innerHTML = `<a href="./pages/login.html">Login</a>`
+                    parentElement.innerHTML = ""
+                    feedback.innerHTML = '<a href="./pages/signUp.html">Create an account </a> to get started. Returning user? <a href="./pages/login.html">Login</a> to view tasks.'
+                } else {
+                    feedback.innerHTML = response.json()
+                }
+            } catch (err) {
+                console.log(err.message)
+            }
+
         }
     })
 }
@@ -34,7 +48,7 @@ loggedInStatus()
 //display all todos
 async function fetchTodos() {
     if (!userSignedIn.signedIn) {
-       return;
+        return;
     }
     try {
         const response = await fetch(`${BASE_URL}/api/task/all-tasks`, {
@@ -46,7 +60,7 @@ async function fetchTodos() {
         if (response.ok) {
             feedback.textContent = ""
             renderTodos(data)
-        } 
+        }
     } catch (err) {
         console.log(err.message)
     }
@@ -75,7 +89,7 @@ select.addEventListener("change", async (e) => {
 
 //mark task(s) as completed 
 completedBtn.addEventListener("click", () => {
-  
+
     handleActionBtns("PATCH", "status-update/completed")
 })
 
@@ -95,7 +109,7 @@ deleteBtn.addEventListener("click", () => {
 //handle notifications
 async function handleNotifications() {
     if (!userSignedIn.signedIn) {
-       return;
+        return;
     }
 
     try {
@@ -107,23 +121,22 @@ async function handleNotifications() {
 
         for (let item of data) {
             if (item.dueDate === dateToday) {
-              alert(`Task due: ${item.title} ${item.dueTime}`)
+                alert(`Task due: ${item.title} ${item.dueTime}`)
             }
         }
     } catch (err) {
         console.log(err.message)
     }
 }
-
 handleNotifications()
 
 
 //Reusable functions
 function sorting(data, sortBy) {
-   
+
     if (sortBy === "overdue") {
         overdueTasks = []
-        
+
         const pendingTasks = data.filter((item) => item.status === "pending")
 
         pendingTasks.map((item) => {
@@ -132,10 +145,10 @@ function sorting(data, sortBy) {
             }
         })
         return overdueTasks;
-    } else if (sortBy === "date"){
-        const sortedTask = data.sort((a, b)=> new Date(a.dueDate) - (new Date(b.dueDate)))
+    } else if (sortBy === "date") {
+        const sortedTask = data.sort((a, b) => new Date(a.dueDate) - (new Date(b.dueDate)))
         return sortedTask
-    
+
     } else {
         const sortedTask = data.filter((item) => item.status === sortBy);
         return sortedTask;
@@ -148,7 +161,7 @@ function renderTodos(data, sortBy) {
     }
 
     if (sortBy) {
-        data = sorting(data, sortBy) 
+        data = sorting(data, sortBy)
     }
 
     data.map((item) => {
@@ -191,7 +204,7 @@ async function handleActionBtns(method, endpoint) {
         if (todo.checked) {
             const todoId = todo.nextElementSibling.querySelector(".heading a").href.split("=")[1]
             todoIds.push(todoId)
-        } 
+        }
     }
 
     try {
@@ -205,8 +218,8 @@ async function handleActionBtns(method, endpoint) {
         })
         const data = await response.json()
         if (response.ok) {
-            alert(data.message)
             window.location.href = "./index.html"
+            alert(data.message)
         }
     } catch (err) {
         console.log(err.message)

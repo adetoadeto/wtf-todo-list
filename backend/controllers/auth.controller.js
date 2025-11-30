@@ -63,7 +63,7 @@ export const login = async (req, res) => {
             id: existingUser.userId
         }, process.env.JWT);
 
-         res.cookie("stored_token", token, {
+        res.cookie("stored_token", token, {
             httpOnly: true,
             secure: true,
             sameSite: "none",
@@ -79,11 +79,13 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        res.setHeader("Cache-Control", "no-store");
-        res.setHeader("Pragma", "no-cache");
+        // res.setHeader("Cache-Control", "no-store");
+        // res.setHeader("Pragma", "no-cache");
         res.clearCookie("stored_token", {
-            path: "/",
             httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/",
         })
         return res.status(200).json({ message: "Logged out" });
     } catch (err) {

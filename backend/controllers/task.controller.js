@@ -27,7 +27,7 @@ export const createTask = async (req, res) => {
 export const getAllTasks = async (req, res) => {
 
     try {
-        const allTasks = await Task.find({ userId: req.user.id}).select("-__v -userId -createdAt").sort({updatedAt: -1})
+        const allTasks = await Task.find({ userId: req.user.id}).select("-__v -userId -createdAt").sort({createdAt: -1})
         res.status(200).json(allTasks)
 
     } catch (err) {
