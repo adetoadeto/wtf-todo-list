@@ -25,7 +25,7 @@ function loggedInStatus() {
             localStorage.clear()
             navBtn.innerHTML = `<a href="./pages/login.html">Login</a>`
             parentElement.innerHTML = ""
-            feedback.textContent = "Create an account to get started. Returning user? Login to view tasks."
+            feedback.innerHTML = '<a href="./pages/signUp.html">Create an account </a> to get started. Returning user? <a href="./pages/login.html">Login</a> to view tasks.'
         }
     })
 }

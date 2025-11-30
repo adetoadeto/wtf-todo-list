@@ -124,6 +124,12 @@ main hr {
     margin-top: 3rem;
     font-style: italic;
 }
+.main-body .feedback a {
+    text-decoration: underline;
+}
+.main-body .feedback a:hover {
+    cursor: pointer;
+}
 
 .main-body .todos {
     margin-top: 2.5rem; 
