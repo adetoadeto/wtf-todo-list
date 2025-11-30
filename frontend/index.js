@@ -121,7 +121,7 @@ async function handleNotifications() {
 
         for (let item of data) {
             if (item.dueDate === dateToday) {
-                alert(`Task due: ${item.title} ${item.dueTime}`)
+                alert(`Task due: ${item.title} - ${new Date(item.dueTime).toLocaleTimeString()}`)
             }
         }
     } catch (err) {
