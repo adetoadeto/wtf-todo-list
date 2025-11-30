@@ -9,6 +9,9 @@ taskForm.addEventListener("submit", async (e) => {
         window.location.href = "../pages/login.html";
         return;
     }
+
+    feedback.textContent = "Processing...";
+
     const taskName = document.querySelector("#add-task #name").value;
     const taskDescription = document.querySelector("#add-task #description").value;
     const dueDate = document.querySelector("#add-task #due-date").value;
