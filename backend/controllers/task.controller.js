@@ -3,7 +3,7 @@ import Task from "../models/task.model.js";
 export const createTask = async (req, res) => {
     const { title, description, dueDate, dueTime } = req.body;
 
-    if (!title || !description || !dueDate || !dueTime) {
+    if (!title || !dueDate || !dueTime) {
         return res.status(400).json("Fill all fields")
     }
 
